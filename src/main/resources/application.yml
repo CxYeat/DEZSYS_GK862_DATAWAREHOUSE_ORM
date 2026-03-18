@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/mydatabase
+    username: root
+    password: "verysecret"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
