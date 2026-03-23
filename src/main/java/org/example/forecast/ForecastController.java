@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/forecast")
+@RequestMapping("/api/v1/gemini/forecast")
 public class ForecastController {
 
     private final ForecastService forecastService;

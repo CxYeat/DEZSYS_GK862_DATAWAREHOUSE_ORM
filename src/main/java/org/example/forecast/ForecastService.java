@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +37,6 @@ public class ForecastService {
             return "No sales data available to generate a forecast.";
         }
 
-        // Datenaggregation (deine Logik bleibt gleich)
         String salesSummary = purchases.stream()
                 .collect(Collectors.groupingBy(p -> p.getProduct().getName(), Collectors.summingInt(ProductPurchaseEntity::getAmount)))
                 .entrySet().stream()
@@ -52,14 +50,12 @@ public class ForecastService {
 
     private String callGemini(String prompt) {
         try {
-            // Google Gemini erwartet ein "contents" Array mit "parts"
             GeminiRequest request = new GeminiRequest(
                     Collections.singletonList(new Content(
                             Collections.singletonList(new Part(prompt))
                     ))
             );
 
-            // API Key wird als Query-Parameter angehängt
             String urlWithKey = apiUrl + "?key=" + apiKey;
 
             GeminiResponse response = restTemplate.postForObject(urlWithKey, request, GeminiResponse.class);
@@ -73,7 +69,6 @@ public class ForecastService {
         }
     }
 
-    // --- Hilfsklassen für das Google API Format ---
 
     @Data @AllArgsConstructor @NoArgsConstructor
     static class GeminiRequest {
