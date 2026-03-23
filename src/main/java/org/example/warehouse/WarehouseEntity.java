@@ -2,7 +2,6 @@ package org.example.warehouse;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "warehouse")
@@ -48,6 +48,10 @@ public class WarehouseEntity {
     @Size(max = 50)
     @Column(name = "country", nullable = false)
     private String country;
+
+    @JoinColumn(name = "products")
+    @OneToMany
+    private List<ProductEntity> products;
 
     @CreationTimestamp
     @Column(name = "timestamp", nullable = false)
